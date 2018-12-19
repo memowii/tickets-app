@@ -1,0 +1,44 @@
+<template>
+  <div id="app">
+    <TicketsTable v-bind:tickets="tickets" v-on:copy-consecutivo="copyConsecutivo" />
+    <input id="clipboard-input" type="hidden" />
+  </div>
+</template>
+
+<script>
+  import TicketsTable from './components/TicketsTable';
+  import axios from 'axios';
+
+  export default {
+    name: 'App',
+    components: {
+      TicketsTable
+    },
+    data() {
+      return {
+        tickets: null
+      };
+    },
+    created() {
+      axios.get('http://localhost:3000/tickets').then(response => {
+        this.tickets = response.data;
+      }).catch(error => {
+        console.log(error);
+      });
+    },
+    methods: {
+      copyConsecutivo: function (consecutivo) {
+        let clipboardInput = document.querySelector('#clipboard-input');
+        clipboardInput.setAttribute('type', 'text');
+        clipboardInput.value = consecutivo;
+        clipboardInput.select();
+        document.execCommand('copy');
+        clipboardInput.setAttribute('type', 'hidden');
+      }
+    }
+  }
+</script>
+
+<style>
+
+</style>
