@@ -5,7 +5,9 @@
       <th>Acciones</th>
     </tr>
     <tr v-for="ticket in tickets">
-      <td>{{ ticket.consecutivo }}</td>
+      <td v-bind:class="{ 'consecutivo-marcado': ticket.esta_usado !== 0 }">
+        {{ ticket.consecutivo }}
+      </td>
       <td>
         <div>
           <button class="copiar" type="button" @click="copy(ticket.consecutivo)">Copiar</button>

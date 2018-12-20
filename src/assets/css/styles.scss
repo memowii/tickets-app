@@ -2,6 +2,11 @@ html {
   scroll-behavior: smooth;
 }
 
+table {
+  margin: 25px auto;
+  background-color: #FFFAF0;
+}
+
 table,
 th,
 td {
@@ -54,7 +59,7 @@ button {
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
-@keyframes fadein { 
+@keyframes fadein {
   from {
     bottom: 0;
     opacity: 0;
@@ -76,4 +81,8 @@ button {
     bottom: 0;
     opacity: 0;
   }
+}
+
+.consecutivo-marcado {
+  text-decoration: line-through;
 }
