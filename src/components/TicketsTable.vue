@@ -9,7 +9,7 @@
       <td>
         <div>
           <button class="copiar" type="button" @click="copy(ticket.consecutivo)">Copiar</button>
-          <button class="marcar-desmarcar" type="button" v-bind:value="ticket.id">
+          <button class="marcar-desmarcar" type="button" @click="checkUncheckTicket(ticket)">
             {{ setButtonText(ticket.esta_usado) }}
           </button>
         </div>
@@ -28,6 +28,9 @@
       },
       copy: function (consecutivo) {
         this.$emit('copy-consecutivo', consecutivo)
+      },
+      checkUncheckTicket: function (ticket) {
+        console.log(this.$emit('check-uncheck-ticket', ticket));
       }
     }
   }
