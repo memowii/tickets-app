@@ -32,7 +32,7 @@
         this.$emit('copy-consecutivo', consecutivo)
       },
       checkUncheckTicket: function (ticket) {
-        console.log(this.$emit('check-uncheck-ticket', ticket));
+        this.$emit('check-uncheck-ticket', ticket);
       }
     }
   }
