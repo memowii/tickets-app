@@ -4,7 +4,9 @@
                   v-on:copy-consecutivo="copyConsecutivo"
                   v-on:check-uncheck-ticket="checkUncheckTicket" />
     <input id="clipboard-input" type="hidden" />
-    <div id="snackbar" v-bind:class="{ show: isSnackbarShown }">Consecutivo copiado</div>
+    <div id="snackbar" v-bind:class="{ show: isSnackbarShown }">
+      Consecutivo {{ snackbarConsecutivo }} copiado
+    </div>
   </div>
 </template>
 
@@ -21,6 +23,7 @@
       return {
         tickets: null,
         isSnackbarShown: false,
+        snackbarConsecutivo: null
       };
     },
     created() {
@@ -39,6 +42,7 @@
         document.execCommand('copy');
         clipboardInput.setAttribute('type', 'hidden');
         window.getSelection().removeAllRanges();
+        this.snackbarConsecutivo = consecutivo;
         this.isSnackbarShown = true;
         setTimeout(() => {
           this.isSnackbarShown = false;
