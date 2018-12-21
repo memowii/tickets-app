@@ -4,7 +4,7 @@
       <th>Número consecutivo de ticket</th>
       <th>Acciones</th>
     </tr>
-    <tr v-for="ticket in tickets">
+    <tr v-bind:id="[index === countUsedTickets ? 'last-ticket' : '']" v-for="(ticket, index) in tickets">
       <td v-bind:class="{ 'consecutivo-marcado': ticket.esta_usado !== 0 }">
         {{ ticket.consecutivo }}
       </td>
@@ -24,6 +24,15 @@
   export default {
     name: "TicketsTable",
     props: ['tickets'],
+    computed: {
+      countUsedTickets: function () {
+        let total = 0;
+        for (let ticketIndx in this.tickets) {
+          if (this.tickets[ticketIndx].esta_usado === 1) total++;
+        }
+        return total;
+      }
+    },
     methods: {
       setButtonText: function (esta_usado) {
         return esta_usado === 1 ? 'Desmarcar' : 'Marcar'
