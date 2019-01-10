@@ -26,11 +26,8 @@
     props: ['tickets'],
     computed: {
       countUsedTickets: function () {
-        let total = 0;
-        for (let ticketIndx in this.tickets) {
-          if (this.tickets[ticketIndx].esta_usado === 1) total++;
-        }
-        return total;
+        return Object.entries(this.tickets).reduce((sum, current) =>
+          sum + (current[1].esta_usado === 1), 0);
       }
     },
     methods: {
