@@ -4,7 +4,8 @@ import Vue from 'vue';
 import App from './App';
 import VueSnackbar from 'vue-snack';
 import './assets/css/styles.scss';
-import 'vue-snack/dist/vue-snack.min.css'
+import 'vue-snack/dist/vue-snack.min.css';
+import { store } from './vuex/store';
 
 Vue.config.productionTip = false;
 
@@ -16,6 +17,7 @@ Vue.use(VueSnackbar, {
 /* eslint-disable no-new */
 let vm = new Vue({
   el: '#app',
+  store,
   components: { App },
   template: '<App/>'
 });

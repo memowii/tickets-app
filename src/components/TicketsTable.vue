@@ -21,13 +21,19 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
+
   export default {
     name: "TicketsTable",
-    props: ['tickets'],
     computed: {
+      ...mapGetters({
+        tickets: 'getTickets'
+      }),
       countUsedTickets: function () {
-        return Object.entries(this.tickets).reduce((sum, current) =>
-          sum + (current[1].esta_usado === 1), 0);
+        return Object.entries(this.tickets).filter(arrayElement => {
+          let ticket = arrayElement [1];
+          return ticket.esta_usado === 1
+        }).length
       }
     },
     methods: {
@@ -39,7 +45,22 @@
       },
       checkUncheckTicket: function (ticket) {
         this.$emit('check-uncheck-ticket', ticket);
-      }
+      },
+      scrollToLastUsedTicket: function () {
+        let tempAnchorTag = document.createElement('a');
+        tempAnchorTag.setAttribute('href', '#last-ticket');
+        tempAnchorTag.innerHTML = 'temp';
+
+        this.$el.appendChild(tempAnchorTag);
+
+        tempAnchorTag.click();
+        tempAnchorTag.parentNode.removeChild(tempAnchorTag);
+      },
+    },
+    updated() {
+      this.$nextTick(function () {
+        this.scrollToLastUsedTicket();
+      });
     }
   }
 </script>

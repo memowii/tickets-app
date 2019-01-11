@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <TicketsTable v-bind:tickets="tickets"
-                  v-on:copy-consecutivo="copyConsecutivo"
+    <TicketsTable v-on:copy-consecutivo="copyConsecutivo"
                   v-on:check-uncheck-ticket="checkUncheckTicket" />
     <input id="clipboard-input" type="hidden" />
   </div>
@@ -9,28 +8,18 @@
 
 <script>
   import TicketsTable from './components/TicketsTable';
-  import axios from 'axios';
+  import { mapActions } from 'vuex';
 
   export default {
     name: 'App',
     components: {
       TicketsTable
     },
-    data() {
-      return {
-        tickets: null,
-        isSnackbarShown: false,
-        snackbarConsecutivo: null
-      };
-    },
-    created() {
-      axios.get('http://localhost:3000/tickets').then(response => {
-        this.tickets = response.data;
-      }).catch(error => {
-        console.log(error);
-      });
+    mounted () {
+      this.populateTicketTable();
     },
     methods: {
+      ...mapActions(['populateTicketTable']),
       copyConsecutivo: function (consecutivo) {
         let clipboardInput = document.querySelector('#clipboard-input');
         clipboardInput.setAttribute('type', 'text');
@@ -64,11 +53,6 @@
         tempAnchorTag.parentNode.removeChild(tempAnchorTag);
       },
     },
-    updated() {
-      this.$nextTick(function () {
-        this.scrollToLastUsedTicket();
-      });
-    }
   }
 </script>
 
