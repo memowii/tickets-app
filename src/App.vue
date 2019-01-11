@@ -42,16 +42,6 @@
             console.log(response);
         });
       },
-      scrollToLastUsedTicket: function () {
-        let tempAnchorTag = document.createElement('a');
-        tempAnchorTag.setAttribute('href', '#last-ticket');
-        tempAnchorTag.innerHTML = 'temp';
-
-        this.$el.appendChild(tempAnchorTag);
-
-        tempAnchorTag.click();
-        tempAnchorTag.parentNode.removeChild(tempAnchorTag);
-      },
     },
   }
 </script>
