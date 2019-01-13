@@ -11,7 +11,7 @@
       <td>
         <div>
           <button class="copiar" type="button" @click="copy(ticket.consecutivo)">Copiar</button>
-          <button class="marcar-desmarcar" type="button" @click="checkUncheckTicket(ticket)">
+          <button class="marcar-desmarcar" type="button" @click="markUnmarkTicket(ticket)">
             {{ setButtonText(ticket.esta_usado) }}
           </button>
         </div>
@@ -43,8 +43,8 @@
       copy: function (consecutivo) {
         this.$emit('copy-consecutivo', consecutivo)
       },
-      checkUncheckTicket: function (ticket) {
-        this.$emit('check-uncheck-ticket', ticket);
+      markUnmarkTicket: function (ticket) {
+        this.$emit('mark-unmark-ticket', ticket);
       },
       scrollToLastUsedTicket: function () {
         let tempAnchorTag = document.createElement('a');

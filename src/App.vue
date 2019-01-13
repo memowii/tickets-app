@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <TicketsTable v-on:copy-consecutivo="copyConsecutivo"
-                  v-on:check-uncheck-ticket="checkUncheckTicket" />
+                  v-on:mark-unmark-ticket="markUnmarkTicket" />
     <input id="clipboard-input" type="hidden" />
   </div>
 </template>
@@ -19,7 +19,7 @@
       this.populateTicketTable();
     },
     methods: {
-      ...mapActions(['populateTicketTable']),
+      ...mapActions(['populateTicketTable', 'updateTicket']),
       copyConsecutivo: function (consecutivo) {
         let clipboardInput = document.querySelector('#clipboard-input');
         clipboardInput.setAttribute('type', 'text');
@@ -34,13 +34,8 @@
           button: 'ok',
         });
       },
-      checkUncheckTicket: function (ticket) {
-        ticket.esta_usado = ticket.esta_usado === 0 ? 1 : 0;
-
-        axios.put(`http://localhost:3000/tickets/${ticket.id}`, ticket)
-          .then(response => {
-            console.log(response);
-        });
+      markUnmarkTicket: function (ticket) {
+        this.updateTicket(ticket);
       },
     },
   }
