@@ -15,7 +15,7 @@
     components: {
       TicketsTable
     },
-    mounted () {
+    created () {
       this.populateTicketTable();
     },
     methods: {
