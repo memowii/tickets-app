@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <TicketsTable v-on:copy-consecutivo="copyConsecutivo"
-                  v-on:mark-unmark-ticket="markUnmarkTicket" />
+    <TicketsTable />
     <input id="clipboard-input" type="hidden" />
   </div>
 </template>
@@ -19,24 +18,7 @@
       this.populateTicketTable();
     },
     methods: {
-      ...mapActions(['populateTicketTable', 'updateTicket']),
-      copyConsecutivo: function (consecutivo) {
-        let clipboardInput = document.querySelector('#clipboard-input');
-        clipboardInput.setAttribute('type', 'text');
-        clipboardInput.value = consecutivo;
-        clipboardInput.select();
-        document.execCommand('copy');
-        clipboardInput.setAttribute('type', 'hidden');
-        window.getSelection().removeAllRanges();
-
-        this.$snack.success({
-          text: `El consecutivo ${consecutivo} ha sido copiado.`,
-          button: 'ok',
-        });
-      },
-      markUnmarkTicket: function (ticket) {
-        this.updateTicket(ticket);
-      },
+      ...mapActions(['populateTicketTable']),
     },
   }
 </script>

@@ -4,27 +4,21 @@
       <th>Número consecutivo de ticket</th>
       <th>Acciones</th>
     </tr>
-    <tr v-bind:id="[index === countUsedTickets ? 'last-ticket' : '']" v-for="(ticket, index) in tickets">
-      <td v-bind:class="{ 'consecutivo-marcado': ticket.esta_usado !== 0 }">
-        {{ ticket.consecutivo }}
-      </td>
-      <td>
-        <div>
-          <button class="copiar" type="button" @click="copy(ticket.consecutivo)">Copiar</button>
-          <button class="marcar-desmarcar" type="button" @click="markUnmarkTicket(ticket)">
-            {{ setButtonText(ticket.esta_usado) }}
-          </button>
-        </div>
-      </td>
-    </tr>
+    <TicketTableRow v-bind:id="[index === countUsedTickets ? 'last-ticket' : '']"
+                    v-for="(ticket, index) in tickets" :key="ticket.id"
+                    v-bind:ticket="ticket"/>
   </table>
 </template>
 
 <script>
+  import TicketTableRow from './TicketTableRow';
   import { mapGetters } from 'vuex';
 
   export default {
     name: "TicketsTable",
+    components: {
+      TicketTableRow
+    },
     computed: {
       ...mapGetters({
         tickets: 'getTickets'
@@ -36,32 +30,6 @@
         }).length
       }
     },
-    methods: {
-      setButtonText: function (esta_usado) {
-        return esta_usado === 1 ? 'Desmarcar' : 'Marcar'
-      },
-      copy: function (consecutivo) {
-        this.$emit('copy-consecutivo', consecutivo)
-      },
-      markUnmarkTicket: function (ticket) {
-        this.$emit('mark-unmark-ticket', ticket);
-      },
-      scrollToLastUsedTicket: function () {
-        let tempAnchorTag = document.createElement('a');
-        tempAnchorTag.setAttribute('href', '#last-ticket');
-        tempAnchorTag.innerHTML = 'temp';
-
-        this.$el.appendChild(tempAnchorTag);
-
-        tempAnchorTag.click();
-        tempAnchorTag.parentNode.removeChild(tempAnchorTag);
-      },
-    },
-    updated() {
-      this.$nextTick(function () {
-        this.scrollToLastUsedTicket();
-      });
-    }
   }
 </script>
 
