@@ -21,14 +21,9 @@
     },
     computed: {
       ...mapGetters({
-        tickets: 'getTickets'
+        tickets: 'getTickets',
       }),
-      countUsedTickets: function () {
-        return Object.entries(this.tickets).filter(arrayElement => {
-          let ticket = arrayElement [1];
-          return ticket.esta_usado === 1
-        }).length
-      }
+      ...mapGetters(['countUsedTickets']),
     },
   }
 </script>
