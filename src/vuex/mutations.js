@@ -1,7 +1,7 @@
 import * as types from './mutation_types';
 
 export default {
-  [types.POPULATE_TICKET_TABLE] (state, tickets) {
+  [types.POPULATE_TICKETS] (state, tickets) {
     state.tickets = tickets;
   },
   [types.UPDATE_TICKET] (state, ticket) {

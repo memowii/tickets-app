@@ -15,10 +15,10 @@
       TicketsTable
     },
     created () {
-      this.populateTicketTable();
+      this.populateTickets();
     },
     methods: {
-      ...mapActions(['populateTicketTable']),
+      ...mapActions(['populateTickets']),
     },
   }
 </script>

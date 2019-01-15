@@ -1,11 +1,10 @@
-import { POPULATE_TICKET_TABLE, UPDATE_TICKET } from './mutation_types';
+import { POPULATE_TICKETS, UPDATE_TICKET } from './mutation_types';
 import api from  '../api';
-import getters from './getters';
 
 export default {
-  populateTicketTable: ({ commit }) => {
+  populateTickets: ({ commit }) => {
     return api.fetchTickets().then(response => {
-      commit(POPULATE_TICKET_TABLE, response.data);
+      commit(POPULATE_TICKETS, response.data);
     });
   },
   updateTicket: (store, ticket) => {
