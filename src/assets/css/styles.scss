@@ -41,3 +41,20 @@ button {
 .consecutivo-marcado {
   text-decoration: line-through;
 }
+
+#buttons-section {
+  margin: 0 auto;
+  width: 25%;
+
+  div {
+    display: inline-block;
+    margin: 0 25px;
+  }
+
+  #csv-form {
+    input {
+      display: block;
+      margin: 10px 0;
+    }
+  }
+}

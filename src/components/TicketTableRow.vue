@@ -20,11 +20,6 @@
   export default {
     name: "TicketTableRow",
     props: ['ticket'],
-    mounted() {
-      this.$nextTick(function () {
-        this.scrollToLastUsedTicket();
-      });
-    },
     methods: {
       ...mapActions(['updateTicket']),
       markUnmarkTicket: function (ticket) {
@@ -46,20 +41,6 @@
           text: `El consecutivo ${consecutivo} ha sido copiado.`,
           button: 'ok',
         });
-      },
-      scrollToLastUsedTicket: function () {
-        if (this.$el.id !== 'last-ticket') {
-          return;
-        }
-
-        let tempAnchorTag = document.createElement('a');
-        tempAnchorTag.setAttribute('href', '#last-ticket');
-        tempAnchorTag.innerHTML = 'temp';
-
-        this.$el.appendChild(tempAnchorTag);
-
-        tempAnchorTag.click();
-        tempAnchorTag.parentNode.removeChild(tempAnchorTag);
       },
     }
   }
