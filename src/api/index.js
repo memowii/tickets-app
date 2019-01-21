@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueResource from 'vue-resource';
+import axios from 'axios';
 
 Vue.use(VueResource);
 
@@ -12,4 +13,7 @@ export default {
   updateTicket: (data) => {
     return TicketsResource.update({ id: data.id }, data)
   },
+  sendCSVFile: (data) => {
+    return axios.post('http://localhost:3000/csvfile', data);
+  }
 }

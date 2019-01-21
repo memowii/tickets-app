@@ -15,4 +15,9 @@ export default {
       store.commit(UPDATE_TICKET, ticket);
     });
   },
+  uploadCSVFile: (store, CSVForm) => {
+    return api.sendCSVFile(CSVForm).then((res) => {
+      console.log(res);
+    });
+  },
 }
