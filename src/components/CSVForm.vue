@@ -15,7 +15,7 @@
   export default {
     name: "CSVForm",
     methods: {
-      ...mapActions(['uploadCSVFile']),
+      ...mapActions(['uploadCSVFile', 'populateTickets']),
       onUpload: function (event) {
         let CSVFile = event.target.elements[0].files[0];
 
@@ -32,7 +32,10 @@
         let form = new FormData();
         form.append('csvfile', CSVFile, CSVFile.name);
 
-        this.uploadCSVFile(form);
+        this.uploadCSVFile(form).then((result) => {
+          alert(result.message);
+          location.reload();
+        });
       }
     }
   }

@@ -14,6 +14,6 @@ export default {
     return TicketsResource.update({ id: data.id }, data)
   },
   sendCSVFile: (data) => {
-    return axios.post('http://localhost:3000/csvfile', data);
+    return axios.post('http://localhost:3000/csvfiles', data);
   }
 }

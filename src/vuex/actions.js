@@ -17,7 +17,7 @@ export default {
   },
   uploadCSVFile: (store, CSVForm) => {
     return api.sendCSVFile(CSVForm).then((res) => {
-      console.log(res);
+      return res.data;
     });
   },
 }
