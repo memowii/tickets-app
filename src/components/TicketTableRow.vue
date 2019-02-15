@@ -27,7 +27,6 @@
     props: ['ticket'],
     data() {
       return {
-        i: 0,
         lastSetTimeoutId: null,
       }
     },
