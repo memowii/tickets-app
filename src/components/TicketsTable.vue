@@ -2,6 +2,7 @@
   <table id="table-numero-consecutivo-ticket">
     <tr>
       <th>Número consecutivo de ticket</th>
+      <th>Comentario</th>
       <th>Acciones</th>
     </tr>
     <TicketTableRow v-bind:id="[index === countUsedTickets ? 'last-ticket' : '']"

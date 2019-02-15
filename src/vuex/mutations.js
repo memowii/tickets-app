@@ -1,10 +1,14 @@
 import * as types from './mutation_types';
+import getters from './getters';
 
 export default {
   [types.POPULATE_TICKETS] (state, tickets) {
     state.tickets = tickets;
   },
-  [types.UPDATE_TICKET] (state, ticket) {
-    ticket.esta_usado = ticket.esta_usado === 0 ? 1 : 0;
+  [types.RESTORE_TICKET] (state, copyTicket) {
+    const storedTicket = getters.getTicketById(state, copyTicket.id);
+    storedTicket.esta_usado = copyTicket.esta_usado;
+    storedTicket.comentario = copyTicket.comentario;
+    storedTicket.esta_usado = copyTicket.esta_usado;
   }
 }

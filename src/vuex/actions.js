@@ -1,4 +1,4 @@
-import { POPULATE_TICKETS, UPDATE_TICKET } from './mutation_types';
+import { POPULATE_TICKETS, UPDATE_TICKET, RESTORE_TICKET } from './mutation_types';
 import api from  '../api';
 
 export default {
@@ -7,12 +7,9 @@ export default {
       commit(POPULATE_TICKETS, response.data);
     });
   },
-  updateTicket: (store, ticket) => {
-    let ticketCopy = Object.assign({}, ticket);
-    ticketCopy.esta_usado = ticketCopy.esta_usado === 0 ? 1 : 0;
-
-    return api.updateTicket(ticketCopy).then(() => {
-      store.commit(UPDATE_TICKET, ticket);
+  updateTicket: (store, ticket, ticketCopy) => {
+    return api.updateTicket(ticket).catch(() => {
+      store.commit(RESTORE_TICKET, ticketCopy);
     });
   },
   uploadCSVFile: (store, CSVForm) => {
