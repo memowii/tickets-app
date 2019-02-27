@@ -14,7 +14,9 @@ export default {
     });
   },
   updateTicketComentario: (store, ticket) => {
-    return api.updateTicket(ticket);
+    return api.updateTicket(ticket).catch(() => {
+      alert('Hubo un problema al actualizar su ticket.\nRefresque la página y vuelva a intentarlo.')
+    });
   },
   uploadCSVFile: (store, CSVForm) => {
     return api.sendCSVFile(CSVForm).then((res) => {
