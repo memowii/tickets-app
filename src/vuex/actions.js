@@ -1,4 +1,4 @@
-import { POPULATE_TICKETS, UPDATE_TICKET, RESTORE_TICKET } from './mutation_types';
+import { POPULATE_TICKETS, UPDATE_TICKET, RESTORE_TICKET, MARK_UNMARK_TICKET, APPLY_TICKET_MEMENTO } from './mutation_types';
 import api from  '../api';
 
 export default {
@@ -7,10 +7,14 @@ export default {
       commit(POPULATE_TICKETS, response.data);
     });
   },
-  updateTicket: (store, ticket, ticketCopy) => {
+  updateMarkUnmarkTicket: (store, ticket) => {
+    store.commit(MARK_UNMARK_TICKET, ticket);
     return api.updateTicket(ticket).catch(() => {
-      store.commit(RESTORE_TICKET, ticketCopy);
+      store.commit(RESTORE_TICKET, ticket);
     });
+  },
+  updateTicketComentario: (store, ticket) => {
+    return api.updateTicket(ticket);
   },
   uploadCSVFile: (store, CSVForm) => {
     return api.sendCSVFile(CSVForm).then((res) => {

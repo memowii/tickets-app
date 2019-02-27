@@ -31,11 +31,9 @@
       }
     },
     methods: {
-      ...mapActions(['updateTicket']),
+      ...mapActions(['updateTicket', 'updateMarkUnmarkTicket', 'updateTicketComentario']),
       markUnmarkTicket: function (ticket) {
-        const ticketCopy = Object.assign({}, ticket);
-        ticket.esta_usado = ticket.esta_usado === 0 ? 1 : 0;
-        this.updateTicket(ticket, ticketCopy);
+        this.updateMarkUnmarkTicket(ticket);
       },
       setButtonText: function (esta_usado) {
         return esta_usado === 1 ? 'Desmarcar' : 'Marcar'
@@ -55,10 +53,9 @@
         });
       },
       updateComentario: function (ticket) {
-        const ticketCopy = Object.assign({}, ticket);
         clearTimeout(this.lastSetTimeoutId);
         this.lastSetTimeoutId = setTimeout(() => {
-          this.updateTicket(ticket, ticketCopy);
+          this.updateTicketComentario(ticket);
         }, 200);
       },
     }
