@@ -4,7 +4,7 @@ import axios from 'axios';
 
 Vue.use(VueResource);
 
-const TicketsResource = Vue.resource('http://localhost:3000/' + 'tickets{/id}');
+const TicketsResource = Vue.resource('http://localhost:3000/api/v1/' + 'tickets{/id}');
 
 export default {
   fetchTickets: () => {
@@ -14,6 +14,6 @@ export default {
     return TicketsResource.update({ id: data.id }, data)
   },
   sendCSVFile: (data) => {
-    return axios.post('http://localhost:3000/csvfiles', data);
+    return axios.post('http://localhost:3000/api/v1/csvfiles', data);
   }
 }
